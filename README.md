@@ -65,6 +65,8 @@
 
 ## Install
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/tiaanduplessis/kill-port.svg)](https://greenkeeper.io/)
+
 ```sh
 $ npm install --save kill-port
 # OR
