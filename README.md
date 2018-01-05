@@ -118,8 +118,6 @@ $ kill-port 9000
 
 Contributions are welcome. Please open up an issue or create PR if you would like to help out.
 
-Note: If editing the README, please conform to the [standard-readme](https://github.com/RichardLitt/standard-readme) specification.
-
 ## License
 
 Licensed under the MIT License.
