@@ -7,17 +7,17 @@
   <a href="https://npmjs.org/package/kill-port">
     <img src="https://img.shields.io/npm/v/kill-port.svg?style=flat-square" alt="Package version" />
   </a>
+  <a href="https://greenkeeper.io/">
+    <img src="https://badges.greenkeeper.io/tiaanduplessis/kill-port.svg" alt="Greenkeeper" />
+  </a>
   <a href="https://npmjs.org/package/kill-port">
-  <img src="https://img.shields.io/npm/dm/kill-port.svg?style=flat-square" alt="Downloads" />
+    <img src="https://img.shields.io/npm/dm/kill-port.svg?style=flat-square" alt="Downloads" />
   </a>
   <a href="https://github.com/feross/standard">
     <img src="https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat-square" alt="Standard" />
   </a>
   <a href="https://travis-ci.org/tiaanduplessis/kill-port">
     <img src="https://img.shields.io/travis/tiaanduplessis/kill-port.svg?style=flat-square" alt="Travis Build" />
-  </a>
-  <a href="https://github.com/RichardLitt/standard-readme)">
-    <img src="https://img.shields.io/badge/standard--readme-OK-green.svg?style=flat-square" alt="Standard Readme" />
   </a>
   <a href="https://badge.fury.io/gh/tiaanduplessis%2Fkill-port">
     <img src="https://badge.fury.io/gh/tiaanduplessis%2Fkill-port.svg?style=flat-square" alt="GitHub version" />
@@ -30,9 +30,6 @@
   </a>
   <a href="http://makeapullrequest.com">
     <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square" alt="PRs" />
-  </a>
-  <a href="https://www.paypal.me/tiaanduplessis/1">
-    <img src="https://img.shields.io/badge/$-support-green.svg?style=flat-square" alt="Donate" />
   </a>
 </div>
 <br>
@@ -64,8 +61,6 @@
 </details>
 
 ## Install
-
-[![Greenkeeper badge](https://badges.greenkeeper.io/tiaanduplessis/kill-port.svg)](https://greenkeeper.io/)
 
 ```sh
 $ npm install --save kill-port
@@ -115,6 +110,8 @@ Then:
 
 ```sh
 $ kill-port --port 8080
+# OR
+$ kill-port 9000
 ```
 
 ## Contribute
