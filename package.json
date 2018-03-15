@@ -35,7 +35,7 @@
     "kill-port"
   ],
   "dependencies": {
-    "execa": "^0.9.0",
+    "execa": "^0.10.0",
     "get-them-args": "^1.2.1"
   },
   "devDependencies": {
