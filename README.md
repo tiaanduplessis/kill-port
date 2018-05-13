@@ -33,21 +33,6 @@
   </a>
 </div>
 <br>
-<div align="center">
-  <a href="https://github.com/tiaanduplessis/kill-port/watchers">
-    <img src="https://img.shields.io/github/watchers/tiaanduplessis/kill-port.svg?style=social" alt="Github Watch Badge" />
-  </a>
-  <a href="https://github.com/tiaanduplessis/kill-port/stargazers">
-    <img src="https://img.shields.io/github/stars/tiaanduplessis/kill-port.svg?style=social" alt="Github Star Badge" />
-  </a>
-  <a href="https://twitter.com/intent/tweet?text=Check%20out%20kill-port!%20https://github.com/tiaanduplessis/kill-port%20%F0%9F%91%8D">
-    <img src="https://img.shields.io/twitter/url/https/github.com/tiaanduplessis/kill-port.svg?style=social" alt="Tweet" />
-  </a>
-</div>
-<br>
-<div align="center">
-  Built with ❤︎ by <a href="tiaanduplessis.co.za">Tiaan</a> and <a href="https://github.com/tiaanduplessis/kill-port/graphs/contributors">contributors</a>
-</div>
 
 <h2>Table of Contents</h2>
 <details>
