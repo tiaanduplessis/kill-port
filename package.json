@@ -16,12 +16,11 @@
   },
   "scripts": {
     "start": "npm run dev",
-    "pretest": "npm run lint:fix",
+    "pretest": "npm run lint",
     "test": "jest --env=node",
     "test:watch": "npm test -- --watch",
     "coverage": "npm test -- --coverage",
-    "lint": "standard --verbose",
-    "lint:fix": "standard --fix --verbose",
+    "lint": "standard --fix",
     "precommit": "npm test"
   },
   "keywords": [
@@ -39,5 +38,10 @@
     "husky": "^0.14.3",
     "jest": "^22.4.3",
     "standard": "^11.0.1"
+  },
+  "standard": {
+    "env": {
+      "jest": true
+    }
   }
 }
