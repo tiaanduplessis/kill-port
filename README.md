@@ -99,6 +99,14 @@ $ kill-port --port 8080
 $ kill-port 9000
 ```
 
+You can also kill multiple ports:
+
+```sh
+$ kill-port --port 8080,5000,3000
+# OR
+$ kill-port 9000 3000 5000
+```
+
 ## Contribute
 
 Contributions are welcome. Please open up an issue or create PR if you would like to help out.
