@@ -5,8 +5,7 @@ const kill = require('./')
 const args = require('get-them-args')(process.argv.slice(2))
 
 const verbose = args.verbose || false
-
-let port = args.port ? args.port.split(',') : args.unknown
+let port = args.port ? args.port.toString().split(',') : args.unknown
 
 if (!Array.isArray(port)) {
   port = [port]
