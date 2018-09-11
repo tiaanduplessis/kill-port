@@ -1,9 +1,12 @@
 'use strict'
 
-const sh = require('execa').shell
+const sh = require('shell-exec')
 
 module.exports = function (port) {
-  if (!Number.parseInt(port)) {
+
+  port = Number.parseInt(port)
+
+  if (!port) {
     return Promise.reject(new Error('Invalid argument provided for port'))
   }
 
