@@ -3,7 +3,6 @@
 const sh = require('shell-exec')
 
 module.exports = function (port) {
-
   port = Number.parseInt(port)
 
   if (!port) {
