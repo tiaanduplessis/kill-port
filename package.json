@@ -1,6 +1,6 @@
 {
   "name": "kill-port",
-  "version": "1.3.1",
+  "version": "1.3.2",
   "description": "Kill the process running on given port",
   "license": "MIT",
   "main": "index.js",
