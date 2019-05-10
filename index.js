@@ -2,7 +2,7 @@
 
 const sh = require('shell-exec')
 
-module.exports = function (port) {
+module.exports = function (port, method = 'tcp') {
   port = Number.parseInt(port)
 
   if (!port) {
@@ -11,11 +11,11 @@ module.exports = function (port) {
 
   if (process.platform === 'win32') {
     return sh(
-      `Stop-Process -Id (Get-NetTCPConnection -LocalPort ${port}).OwningProcess -Force`
+      `Stop-Process -Id (Get-Net${method=='UDP'?'UDP':'TCP'}Connection -LocalPort ${port}).OwningProcess -Force`
     )
   }
 
   return sh(
-    `lsof -i tcp:${port} | grep LISTEN | awk '{print $2}' | xargs kill -9`
+    `lsof -i ${method=='udp'?'udp':'tcp'}:${port} | grep ${method=='udp'?'UDP':'LISTEN'} | awk '{print $2}' | xargs kill -9`
   )
 }
