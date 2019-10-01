@@ -10,9 +10,19 @@ module.exports = function (port, method = 'tcp') {
   }
 
   if (process.platform === 'win32') {
-    return sh(
-      `Stop-Process -Id (Get-Net${method === 'UDP' ? 'UDP' : 'TCP'}Connection -LocalPort ${port}).OwningProcess -Force`
-    )
+    return sh(`netstat -ao | findStr ${method.toUpperCase()}.*:${port}`)
+      .then(res => {
+        const { stdout } = res
+        if (!stdout) return res
+
+        const lines = stdout.split('\n')
+        const ports = lines.reduce((acc, line) => {
+          const match = line.match(/(\d*)\w*(\n|$)/gm)
+          return match && match[0] && !acc.includes(match[0]) ? acc.concat(match[0]) : acc
+        }, [])
+
+        return sh(`TaskKill /PID ${ports.join(' /PID ')}`)
+      })
   }
 
   return sh(
