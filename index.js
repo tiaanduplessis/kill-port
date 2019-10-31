@@ -19,7 +19,7 @@ module.exports = function (port, method = 'tcp') {
         if (!stdout) return res
 
         const lines = stdout.split('\n')
-        const lineWithLocalPortRegEx = new RegExp(`^ *${method.toUpperCase()} *[^ ]*:${port}.*`, 'gm')
+        const lineWithLocalPortRegEx = new RegExp(`^ *${method.toUpperCase()} *[^ ]*:${port}`, 'gm')
         const linesWithLocalPort = lines.filter(line => {
           const match = line.match(lineWithLocalPortRegEx)
           return match
