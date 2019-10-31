@@ -10,15 +10,15 @@ module.exports = function (port, method = 'tcp') {
   }
 
   if (process.platform === 'win32') {
-    // The second white-space delimited column of netstat output is the local port,
-    // which is the only port we care about.
-    // The findStr "regex" here will match only the local port column of the output
     return sh('netstat -nao')
       .then(res => {
         const { stdout } = res
         if (!stdout) return res
 
         const lines = stdout.split('\n')
+        // The second white-space delimited column of netstat output is the local port,
+        // which is the only port we care about.
+        // The regex here will match only the local port column of the output
         const lineWithLocalPortRegEx = new RegExp(`^ *${method.toUpperCase()} *[^ ]*:${port}`, 'gm')
         const linesWithLocalPort = lines.filter(line => {
           const match = line.match(lineWithLocalPortRegEx)
