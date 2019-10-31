@@ -10,7 +10,10 @@ module.exports = function (port, method = 'tcp') {
   }
 
   if (process.platform === 'win32') {
-    return sh(`netstat -ao | findStr ${method.toUpperCase()}.*:${port}`)
+    // The second white-space delimited column of netstat output is the local port,
+    // which is the only port we care about.
+    // The findStr "regex" here will match only the local port column of the output
+    return sh(`netstat -nao | findStr /r /c:"^ *${method.toUpperCase()} *[^ ]*:${port}`)
       .then(res => {
         const { stdout } = res
         if (!stdout) return res
