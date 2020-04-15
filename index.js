@@ -10,18 +10,24 @@ module.exports = function (port, method = 'tcp') {
   }
 
   if (process.platform === 'win32') {
-    return sh(`netstat -ao | findStr ${method.toUpperCase()}.*:${port}`)
+    return sh('netstat -nao')
       .then(res => {
         const { stdout } = res
         if (!stdout) return res
 
         const lines = stdout.split('\n')
-        const ports = lines.reduce((acc, line) => {
+        // The second white-space delimited column of netstat output is the local port,
+        // which is the only port we care about.
+        // The regex here will match only the local port column of the output
+        const lineWithLocalPortRegEx = new RegExp(`^ *${method.toUpperCase()} *[^ ]*:${port}`, 'gm')
+        const linesWithLocalPort = lines.filter(line => line.match(lineWithLocalPortRegEx))
+
+        const pids = linesWithLocalPort.reduce((acc, line) => {
           const match = line.match(/(\d*)\w*(\n|$)/gm)
           return match && match[0] && !acc.includes(match[0]) ? acc.concat(match[0]) : acc
         }, [])
 
-        return sh(`TaskKill /PID ${ports.join(' /PID ')}`)
+        return sh(`TaskKill /F /PID ${pids.join(' /PID ')}`)
       })
   }
 
