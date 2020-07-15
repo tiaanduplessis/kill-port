@@ -7,9 +7,6 @@
   <a href="https://npmjs.org/package/kill-port">
     <img src="https://img.shields.io/npm/v/kill-port.svg?style=flat-square" alt="Package version" />
   </a>
-  <a href="https://greenkeeper.io/">
-    <img src="https://badges.greenkeeper.io/tiaanduplessis/kill-port.svg" alt="Greenkeeper" />
-  </a>
   <a href="https://npmjs.org/package/kill-port">
     <img src="https://img.shields.io/npm/dm/kill-port.svg?style=flat-square" alt="Downloads" />
   </a>
