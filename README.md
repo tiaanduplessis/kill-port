@@ -16,12 +16,6 @@
   <a href="https://travis-ci.org/tiaanduplessis/kill-port">
     <img src="https://img.shields.io/travis/tiaanduplessis/kill-port.svg?style=flat-square" alt="Travis Build" />
   </a>
-  <a href="https://badge.fury.io/gh/tiaanduplessis%2Fkill-port">
-    <img src="https://badge.fury.io/gh/tiaanduplessis%2Fkill-port.svg?style=flat-square" alt="GitHub version" />
-  </a>
-  <a href="https://dependencyci.com/github/tiaanduplessis/kill-port">
-    <img src="https://dependencyci.com/github/tiaanduplessis/kill-port/badge?style=flat-square" alt="Dependency CI" />
-  </a>
   <a href="https://github.com/tiaanduplessis/kill-port/blob/master/LICENSE">
     <img src="https://img.shields.io/npm/l/kill-port.svg?style=flat-square" alt="License" />
   </a>
