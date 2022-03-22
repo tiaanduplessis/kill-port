@@ -30,8 +30,16 @@ module.exports = function (port, method = 'tcp') {
         return sh(`TaskKill /F /PID ${pids.join(' /PID ')}`)
       })
   }
+  return sh('lsof -i -P')
+    .then(res => {
+      const { stdout } = res
+      if (!stdout) return res;
+      const lines = stdout.split('\n')
+      const existProccess = lines.filter((line) => line.slice(line.indexOf(':'), line.indexOf(':') + 5).includes(port)).length > 0;
+      if (!existProccess) return Promise.reject(new Error('Process not found'));
 
-  return sh(
-    `lsof -i ${method === 'udp' ? 'udp' : 'tcp'}:${port} | grep ${method === 'udp' ? 'UDP' : 'LISTEN'} | awk '{print $2}' | xargs kill -9`
-  )
+      return sh(
+        `lsof -i ${method === 'udp' ? 'udp' : 'tcp'}:${port} | grep ${method === 'udp' ? 'UDP' : 'LISTEN'} | awk '{print $2}' | xargs kill -9`
+      )
+    });
 }
