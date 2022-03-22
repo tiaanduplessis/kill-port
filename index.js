@@ -35,8 +35,8 @@ module.exports = function (port, method = 'tcp') {
       const { stdout } = res
       if (!stdout) return res;
       const lines = stdout.split('\n')
-      const existProccess = lines.filter((line) => line.slice(line.indexOf(':'), line.indexOf(':') + 5).includes(port)).length > 0;
-      if (!existProccess) return Promise.reject(new Error('Process not found'));
+      const existProccess = lines.filter((line) => line.match(new RegExp(`\:\*${port}`))).length > 0;
+      if (!existProccess) return Promise.reject(new Error('Process not found. Port already clean'));
 
       return sh(
         `lsof -i ${method === 'udp' ? 'udp' : 'tcp'}:${port} | grep ${method === 'udp' ? 'UDP' : 'LISTEN'} | awk '{print $2}' | xargs kill -9`
