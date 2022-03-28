@@ -30,6 +30,7 @@ module.exports = function (port, method = 'tcp') {
         return sh(`TaskKill /F /PID ${pids.join(' /PID ')}`)
       })
   }
+
   return sh('lsof -i -P')
     .then(res => {
       const { stdout } = res
@@ -42,4 +43,3 @@ module.exports = function (port, method = 'tcp') {
         `lsof -i ${method === 'udp' ? 'udp' : 'tcp'}:${port} | grep ${method === 'udp' ? 'UDP' : 'LISTEN'} | awk '{print $2}' | xargs kill -9`
       )
     });
-}
