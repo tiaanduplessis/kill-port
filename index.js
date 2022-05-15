@@ -6,7 +6,7 @@ module.exports = function (port, method = 'tcp') {
   port = Number.parseInt(port)
 
   if (!port) {
-    return Promise.reject(new Error('Invalid argument provided for port'))
+    return Promise.reject(new Error('Invalid port number provided'))
   }
 
   if (process.platform === 'win32') {

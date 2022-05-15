@@ -19,7 +19,7 @@ Promise.all(port.map(current => {
       verbose && console.log(result)
     })
     .catch((error) => {
-      console.log(`Could not kill process on port ${port}`)
+      console.log(`Could not kill process on port ${port}. ${error.message}.`)
       verbose && console.log(error)
     })
 }))
