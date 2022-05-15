@@ -1,7 +1,7 @@
 {
   "name": "kill-port",
   "version": "1.6.1",
-  "description": "Kill the process running on given port",
+  "description": "Kill process running on given port",
   "license": "MIT",
   "main": "index.js",
   "repository": {
@@ -18,8 +18,6 @@
     "start": "npm run dev",
     "pretest": "npm run lint",
     "test": "jest --env=node",
-    "test:watch": "npm test -- --watch",
-    "coverage": "npm test -- --coverage",
     "lint": "standard --fix",
     "precommit": "npm test",
     "check": "npm-check -u"
@@ -36,13 +34,8 @@
     "shell-exec": "1.0.2"
   },
   "devDependencies": {
-    "jest": "26.1.0",
+    "jest": "28.1.0",
     "npm-check": "^5.9.2",
-    "standard": "14.3.4"
-  },
-  "standard": {
-    "env": {
-      "jest": true
-    }
+    "standard": "17.0.0"
   }
 }

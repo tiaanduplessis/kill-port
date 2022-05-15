@@ -1,6 +1,9 @@
+<div align="center">
+  <img src="./logo.png" alt="Logo" width="500px">
+</div>
 <h1 align="center">kill-port</h1>
 <div align="center">
-  <strong>Kill the process running on given port</strong>
+  <strong>Kill process running on given por</strong>
 </div>
 <br>
 <div align="center">
@@ -25,23 +28,32 @@
 </div>
 <br>
 
-<h2>Table of Contents</h2>
-<details>
-  <summary>Table of Contents</summary>
-  <li><a href="#install">Install</a></li>
-  <li><a href="#usage">Usage</a></li>
-  <li><a href="#api">API</a></li>
-  <li><a href="#cli">CLI</a></li>
-  <li><a href="#contribute">Contribute</a></li>
-  <li><a href="#license">License</a></li>
-</details>
+
+## Table of Contents
+- [Table of Contents](#table-of-contents)
+- [Install](#install)
+- [Usage](#usage)
+- [API](#api)
+- [CLI](#cli)
+- [Contributing](#contributing)
+- [License](#license)
 
 ## Install
 
+
+With `npm`:
 ```sh
-$ npm install --save kill-port
-# OR
-$ yarn add kill-port
+npm install --save kill-port
+```
+
+With `yarn`:
+```sh
+yarn add kill-port
+```
+
+With `pnpm`:
+```sh
+pnpm add kill-port
 ```
 
 ## Usage
@@ -102,10 +114,10 @@ $ kill-port --port 8080,5000,3000
 $ kill-port 9000 3000 5000
 ```
 
-## Contribute
+## Contributing
 
-Contributions are welcome. Please open up an issue or create PR if you would like to help out.
+Got an idea for a new feature? Found a bug? Contributions are welcome! Please [open up an issue](https://github.com/tiaanduplessis/feature-flip/issues) or [make a pull request](https://makeapullrequest.com/).
 
 ## License
 
-Licensed under the MIT License.
+[MIT © Tiaan du Plessis](./LICENSE)
