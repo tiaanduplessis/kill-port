@@ -36,7 +36,6 @@
     "shell-exec": "1.0.2"
   },
   "devDependencies": {
-    "husky": "4.2.5",
     "jest": "26.1.0",
     "npm-check": "^5.9.2",
     "standard": "14.3.4"
