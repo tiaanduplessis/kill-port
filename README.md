@@ -90,6 +90,10 @@ The module exports a single function that takes a port number as argument. It re
 
 ## CLI
 
+You can use `kill-port` as a global package.
+
+Install the package globally:
+
 ```sh
 $ npm install --global kill-port
 # OR
@@ -112,6 +116,19 @@ You can also kill multiple ports:
 $ kill-port --port 8080,5000,3000
 # OR
 $ kill-port 9000 3000 5000
+```
+
+You can also use [npx](https://nodejs.dev/learn/the-npx-nodejs-package-runner) to `kill-port` without manually installing it globally:
+
+```sh
+# Kill a single port
+$ npx kill-port --port 8080
+$ npx kill-port 8080
+# Use UDP
+$ npx kill-port 9000 --method udp
+# Kill multiple ports
+$ npx kill-port --port 8080,5000,3000
+$ npx kill-port 9000 3000 5000
 ```
 
 ## Contributing
