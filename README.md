@@ -3,7 +3,7 @@
 </div>
 <h1 align="center">kill-port</h1>
 <div align="center">
-  <strong>Kill process running on given por</strong>
+  <strong>Kill process running on given port</strong>
 </div>
 <br>
 <div align="center">
