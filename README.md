@@ -118,6 +118,16 @@ $ kill-port --port 8080,5000,3000
 $ kill-port 9000 3000 5000
 ```
 
+Other CLI options:
+
+```sh
+# Skips logging information to console
+$ kill-port --quiet 8080
+
+# Logs kill result to console
+$ kill-port --verbose 8080
+```
+
 You can also use [npx](https://nodejs.dev/learn/the-npx-nodejs-package-runner) to `kill-port` without installing:
 
 ```sh
