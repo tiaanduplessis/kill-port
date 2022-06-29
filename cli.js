@@ -4,6 +4,7 @@
 const kill = require('./')
 const args = require('get-them-args')(process.argv.slice(2))
 
+const quiet = args.verbose || false
 const verbose = args.verbose || false
 let port = args.port ? args.port.toString().split(',') : args.unknown
 const method = args.method || 'tcp'
@@ -14,12 +15,12 @@ if (!Array.isArray(port)) {
 
 Promise.all(port.map(current => {
   return kill(current, method)
-    .then((result) => {
-      console.log(`Process on port ${current} killed`)
+    .then(result => {
+      quiet || console.log(`Process on port ${current} killed.`)
       verbose && console.log(result)
     })
-    .catch((error) => {
-      console.log(`Could not kill process on port ${port}. ${error.message}.`)
+    .catch(error => {
+      quiet || console.log(`Could not kill process on port ${port}. ${error.message}.`)
       verbose && console.log(error)
     })
 }))
