@@ -74,7 +74,7 @@ const server = http.createServer((req, res) => {
 
 server.listen(port, () => {
   setTimeout(() => {
-    
+
     // Currently you can kill ports running on TCP or UDP protocols
     kill(port, 'tcp')
       .then(console.log)
@@ -128,7 +128,10 @@ $ npx kill-port 8080
 $ npx kill-port 9000 --method udp
 # Kill multiple ports
 $ npx kill-port --port 8080,5000,3000
+$ npx kill-port --port 3000-5000
 $ npx kill-port 9000 3000 5000
+$ npx kill-port 3000-5000
+$ npx kill-port 3000,4000,5000
 ```
 
 ## Contributing
