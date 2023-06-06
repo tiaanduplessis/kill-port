@@ -2,7 +2,7 @@
 
 const sh = require('shell-exec')
 
-module.exports = function (port, method = 'tcp', signal = '9') {
+module.exports = function (port, method = 'tcp', signal = '15') {
   port = Number.parseInt(port)
 	signal = Number.parseInt(signal)
 
