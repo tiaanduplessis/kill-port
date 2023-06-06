@@ -51,14 +51,14 @@ module.exports = function (port, method = 'tcp', signal = 'SIGKILL') {
 }
 
 function mapSignalToNumber(signal) {
-	const signals = {
-		SIGHUP: 1,
-		SIGINT: 2,
-		SIGQUIT: 3,
-		SIGABRT: 6,
-		SIGKILL: 9,
-		SIGTERM: 15
-	}
+  const signals = {
+    SIGHUP: 1,
+    SIGINT: 2,
+    SIGQUIT: 3,
+    SIGABRT: 6,
+    SIGKILL: 9,
+    SIGTERM: 15
+  }
 
-	return signals[signal]
+  return signals[signal]
 }
