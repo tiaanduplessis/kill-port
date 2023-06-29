@@ -113,9 +113,7 @@ $ kill-port 9000 --method udp
 You can also kill multiple ports:
 
 ```sh
-$ kill-port --port 8080,5000,3000
-# OR
-$ kill-port 9000 3000 5000
+$ kill-port 9000,3000,5000
 ```
 
 You can also use [npx](https://nodejs.dev/learn/the-npx-nodejs-package-runner) to `kill-port` without installing:
