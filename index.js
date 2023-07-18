@@ -21,6 +21,7 @@ module.exports = function (port, method = 'tcp') {
         // The regex here will match only the local port column of the output
         const lineWithLocalPortRegEx = new RegExp(`^ *${method.toUpperCase()} *[^ ]*:${port}`, 'gm')
         const linesWithLocalPort = lines.filter(line => line.match(lineWithLocalPortRegEx))
+        if (!linesWithLocalPort.length) return Promise.reject(new Error('No process running on port'))
 
         const pids = linesWithLocalPort.reduce((acc, line) => {
           const match = line.match(/(\d*)\w*(\n|$)/gm)
