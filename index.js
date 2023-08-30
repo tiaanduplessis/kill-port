@@ -2,11 +2,16 @@
 
 const sh = require('shell-exec')
 
-module.exports = function (port, method = 'tcp') {
+module.exports = function (port, method = 'tcp', signal = 'SIGKILL') {
   port = Number.parseInt(port)
+  signal = mapSignalToNumber(signal)
 
   if (!port) {
     return Promise.reject(new Error('Invalid port number provided'))
+  }
+
+  if (!signal) {
+    return Promise.reject(new Error('Invalid signal name provided'))
   }
 
   if (process.platform === 'win32') {
@@ -40,7 +45,20 @@ module.exports = function (port, method = 'tcp') {
       if (!existProccess) return Promise.reject(new Error('No process running on port'))
 
       return sh(
-        `lsof -i ${method === 'udp' ? 'udp' : 'tcp'}:${port} | grep ${method === 'udp' ? 'UDP' : 'LISTEN'} | awk '{print $2}' | xargs kill -9`
+        `lsof -i ${method === 'udp' ? 'udp' : 'tcp'}:${port} | grep ${method === 'udp' ? 'UDP' : 'LISTEN'} | awk '{print $2}' | xargs kill -${signal}`
       )
     })
+}
+
+function mapSignalToNumber(signal) {
+  const signals = {
+    SIGHUP: 1,
+    SIGINT: 2,
+    SIGQUIT: 3,
+    SIGABRT: 6,
+    SIGKILL: 9,
+    SIGTERM: 15
+  }
+
+  return signals[signal]
 }
