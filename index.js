@@ -31,16 +31,17 @@ module.exports = function (port, method = 'tcp') {
       })
   }
 
-  return sh('lsof -i -P')
+  const protocol = method === 'udp' ? 'udp' : 'tcp';
+
+  return sh(`lsof -i ${protocol}:${port}`)
     .then(res => {
       const { stdout } = res
-      if (!stdout) return res
-      const lines = stdout.split('\n')
-      const existProccess = lines.filter((line) => line.match(new RegExp(`:*${port}`))).length > 0
-      if (!existProccess) return Promise.reject(new Error('No process running on port'))
-
+      if (!stdout) return res;
+      if (!stdout.includes(protocol.toUpperCase())) {
+	return Promise.reject(new Error('No process running on port'));
+      }
       return sh(
-        `lsof -i ${method === 'udp' ? 'udp' : 'tcp'}:${port} | grep ${method === 'udp' ? 'UDP' : 'LISTEN'} | awk '{print $2}' | xargs kill -9`
+        `kill -9 $(lsof -t -i ${protocol}:${port})`
       )
     })
 }
