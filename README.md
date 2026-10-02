@@ -118,6 +118,14 @@ $ kill-port --port 8080,5000,3000
 $ kill-port 9000 3000 5000
 ```
 
+Use `--quiet` to suppress success messages (including verbose success details).
+Errors are still reported, and exit behavior is unchanged:
+
+```sh
+$ kill-port --quiet 9000
+$ kill-port --port 8080,5000,3000 --quiet
+```
+
 You can also use [npx](https://nodejs.dev/learn/the-npx-nodejs-package-runner) to `kill-port` without installing:
 
 ```sh
