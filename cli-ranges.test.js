@@ -98,6 +98,21 @@ test('bounds active work to four ports and continues after failures', async () =
     await new Promise(resolve => setImmediate(resolve))
   }
   expect(kill.mock.calls).toEqual(Array.from({ length: 10 }, (_, index) => [3000 + index, 'tcp']))
-  expect(log.mock.calls).toEqual([['Could not kill process on port 3000-3009. permission denied.']])
+  expect(log.mock.calls).toEqual([['Could not kill process on port 3000. permission denied.']])
+  expect(process.exitCode).toBe(exitCode)
+})
+
+test.each([[], ['--quiet']])('reports only the actual failed ports in mixed selections: %p', async (...flags) => {
+  kill.mockImplementation(port => Number(port) === 3001 || Number(port) === 4000
+    ? Promise.reject(new Error('permission denied'))
+    : Promise.resolve({ code: 0 }))
+  await run(['3000-3002', '4000,4001', ...flags])
+  expect(kill.mock.calls).toEqual([[3000, 'tcp'], [3001, 'tcp'], [3002, 'tcp'], ['4000', 'tcp'], ['4001', 'tcp']])
+  const errors = log.mock.calls.filter(([message]) => message.startsWith('Could not kill'))
+  expect(errors).toEqual([
+    ['Could not kill process on port 3001. permission denied.'],
+    ['Could not kill process on port 4000. permission denied.']
+  ])
+  expect(log.mock.calls).toHaveLength(flags.length ? 2 : 5)
   expect(process.exitCode).toBe(exitCode)
 })
