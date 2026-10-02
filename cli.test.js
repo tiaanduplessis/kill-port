@@ -100,6 +100,6 @@ test('keeps failures visible when another port succeeds in quiet mode', async ()
   await run(['--quiet', '3000', '3001'])
   expect(kill.mock.calls).toEqual([['3000', 'tcp'], ['3001', 'tcp']])
   expect(log.mock.calls).toEqual([
-    ['Could not kill process on port 3000,3001. No process running on port.']
+    ['Could not kill process on port 3000. No process running on port.']
   ])
 })

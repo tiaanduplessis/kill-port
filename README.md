@@ -154,8 +154,8 @@ Every port and range endpoint must be an integer between 1 and 65535. Reversed,
 empty, malformed, and out-of-bounds selections are rejected before any processes
 are inspected or terminated, with exit status 1. At most 65535 ports (including
 repeated ports) may be selected in one invocation, and at most four ports are
-processed concurrently. Existing command-failure output and exit behavior are
-unchanged. The JavaScript API continues to accept one port at a time.
+processed concurrently. Command failures identify the individual port that failed,
+including within lists and ranges; existing command-failure exit behavior is unchanged. The JavaScript API continues to accept one port at a time.
 
 ### Signal selection
 

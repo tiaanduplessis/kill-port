@@ -21,7 +21,6 @@ const hasSignal = Object.prototype.hasOwnProperty.call(args, 'signal')
 if (!Array.isArray(port)) {
   port = [port]
 }
-const selection = port.join(',')
 
 let selectionType = 'signal'
 try {
@@ -53,7 +52,7 @@ async function worker () {
         }
       })
       .catch((error) => {
-        console.log(`Could not kill process on port ${selection}. ${error.message}.`)
+        console.log(`Could not kill process on port ${current}. ${error.message}.`)
         verbose && console.log(error)
       })
   }
