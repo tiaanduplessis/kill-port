@@ -1,6 +1,7 @@
 'use strict'
 
 const sh = require('shell-exec')
+const getSignal = require('./signal')
 
 const noProcess = () => new Error('No process running on port')
 
@@ -15,7 +16,7 @@ function hasPort (address, port) {
   return match !== null && Number(match[1]) === port
 }
 
-module.exports = function (port, method = 'tcp') {
+module.exports = function (port, method = 'tcp', signal = 'SIGKILL') {
   if (typeof port === 'string' && /^\d+$/.test(port.trim())) port = Number(port)
   if (!Number.isInteger(port) || port < 1 || port > 65535) {
     return Promise.reject(new Error('Invalid port number provided'))
@@ -25,6 +26,13 @@ module.exports = function (port, method = 'tcp') {
     return Promise.reject(new Error('Invalid protocol provided'))
   }
   method = method.toLowerCase()
+
+  let signalNumber
+  try {
+    signalNumber = getSignal(signal)
+  } catch (error) {
+    return Promise.reject(error)
+  }
 
   const isWindows = process.platform === 'win32'
   const command = isWindows ? 'netstat -nao' : `lsof -nP -i ${method}:${port}`
@@ -59,7 +67,7 @@ module.exports = function (port, method = 'tcp') {
     if (pids.size === 0) throw noProcess()
     const killCommand = isWindows
       ? `TaskKill /F /PID ${Array.from(pids).join(' /PID ')}`
-      : `kill -9 ${Array.from(pids).join(' ')}`
+      : `kill -${signalNumber} ${Array.from(pids).join(' ')}`
     return sh(killCommand).then(checkResult)
   })
 }

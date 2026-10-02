@@ -157,6 +157,33 @@ repeated ports) may be selected in one invocation, and at most four ports are
 processed concurrently. Existing command-failure output and exit behavior are
 unchanged. The JavaScript API continues to accept one port at a time.
 
+### Signal selection
+
+On Unix-like platforms, choose `SIGHUP`, `SIGINT`, `SIGQUIT`, `SIGABRT`,
+`SIGKILL`, or `SIGTERM`. Names are case-sensitive; the default is `SIGKILL`.
+The JavaScript API accepts the signal as its third argument:
+
+```js
+const kill = require('kill-port')
+kill(3000, 'tcp', 'SIGINT').then(console.log).catch(console.error)
+```
+
+```sh
+$ kill-port --signal SIGTERM 3000
+$ kill-port --quiet --signal SIGINT --port 3000-3005
+```
+
+Signal numbers are resolved using the current platform's Node.js signal constants.
+Invalid or unavailable signals reject before any process is inspected or signaled.
+The CLI reports invalid signal selections with exit status 1. A successful
+non-`SIGKILL` request reports that the signal was sent: it does not wait for the
+process to exit or guarantee that it will exit, and never escalates to `SIGKILL`.
+
+Windows continues to use `TaskKill /F` for the default or explicit `SIGKILL`.
+Other signals reject with `Only SIGKILL is supported on Windows`; they are never
+silently replaced by forced termination. `TaskKill` cannot deliver the Unix
+signal semantics requested here.
+
 ## Contributing
 
 Got an idea for a new feature? Found a bug? Contributions are welcome! Please [open up an issue](https://github.com/tiaanduplessis/feature-flip/issues) or [make a pull request](https://makeapullrequest.com/).
