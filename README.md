@@ -139,6 +139,24 @@ $ npx kill-port --port 8080,5000,3000
 $ npx kill-port 9000 3000 5000
 ```
 
+### Port ranges
+
+The CLI accepts inclusive, ascending ranges in positional arguments or `--port`:
+
+```sh
+$ kill-port 3000-3005
+$ kill-port --port 3000-3005
+$ kill-port 3000,4000-4002 5000-5001
+$ kill-port --quiet --port 3000-3005 --method udp
+```
+
+Every port and range endpoint must be an integer between 1 and 65535. Reversed,
+empty, malformed, and out-of-bounds selections are rejected before any processes
+are inspected or terminated, with exit status 1. At most 65535 ports (including
+repeated ports) may be selected in one invocation, and at most four ports are
+processed concurrently. Existing command-failure output and exit behavior are
+unchanged. The JavaScript API continues to accept one port at a time.
+
 ## Contributing
 
 Got an idea for a new feature? Found a bug? Contributions are welcome! Please [open up an issue](https://github.com/tiaanduplessis/feature-flip/issues) or [make a pull request](https://makeapullrequest.com/).
