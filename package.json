@@ -19,8 +19,7 @@
     "pretest": "npm run lint",
     "test": "jest --env=node",
     "lint": "standard --fix",
-    "precommit": "npm test",
-    "check": "npm-check -u"
+    "precommit": "npm test"
   },
   "keywords": [
     "port",
@@ -35,7 +34,6 @@
   },
   "devDependencies": {
     "jest": "28.1.0",
-    "npm-check": "^5.9.2",
     "standard": "17.0.0"
   }
 }
