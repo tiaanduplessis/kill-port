@@ -19,8 +19,7 @@
     "pretest": "npm run lint",
     "test": "jest --env=node",
     "lint": "standard --fix",
-    "precommit": "npm test",
-    "check": "npx npm-check -u"
+    "precommit": "npm test"
   },
   "keywords": [
     "port",

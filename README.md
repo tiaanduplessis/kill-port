@@ -118,6 +118,14 @@ $ kill-port --port 8080,5000,3000
 $ kill-port 9000 3000 5000
 ```
 
+Use `--quiet` to suppress success messages (including verbose success details).
+Errors are still reported, and exit behavior is unchanged:
+
+```sh
+$ kill-port --quiet 9000
+$ kill-port --port 8080,5000,3000 --quiet
+```
+
 You can also use [npx](https://nodejs.dev/learn/the-npx-nodejs-package-runner) to `kill-port` without installing:
 
 ```sh
@@ -130,6 +138,51 @@ $ npx kill-port 9000 --method udp
 $ npx kill-port --port 8080,5000,3000
 $ npx kill-port 9000 3000 5000
 ```
+
+### Port ranges
+
+The CLI accepts inclusive, ascending ranges in positional arguments or `--port`:
+
+```sh
+$ kill-port 3000-3005
+$ kill-port --port 3000-3005
+$ kill-port 3000,4000-4002 5000-5001
+$ kill-port --quiet --port 3000-3005 --method udp
+```
+
+Every port and range endpoint must be an integer between 1 and 65535. Reversed,
+empty, malformed, and out-of-bounds selections are rejected before any processes
+are inspected or terminated, with exit status 1. At most 65535 ports (including
+repeated ports) may be selected in one invocation, and at most four ports are
+processed concurrently. Command failures identify the individual port that failed,
+including within lists and ranges; existing command-failure exit behavior is unchanged. The JavaScript API continues to accept one port at a time.
+
+### Signal selection
+
+On Unix-like platforms, choose `SIGHUP`, `SIGINT`, `SIGQUIT`, `SIGABRT`,
+`SIGKILL`, or `SIGTERM`. Names are case-sensitive; the default is `SIGKILL`.
+The JavaScript API accepts the signal as its third argument:
+
+```js
+const kill = require('kill-port')
+kill(3000, 'tcp', 'SIGINT').then(console.log).catch(console.error)
+```
+
+```sh
+$ kill-port --signal SIGTERM 3000
+$ kill-port --quiet --signal SIGINT --port 3000-3005
+```
+
+Signal numbers are resolved using the current platform's Node.js signal constants.
+Invalid or unavailable signals reject before any process is inspected or signaled.
+The CLI reports invalid signal selections with exit status 1. A successful
+non-`SIGKILL` request reports that the signal was sent: it does not wait for the
+process to exit or guarantee that it will exit, and never escalates to `SIGKILL`.
+
+Windows continues to use `TaskKill /F` for the default or explicit `SIGKILL`.
+Other signals reject with `Only SIGKILL is supported on Windows`; they are never
+silently replaced by forced termination. `TaskKill` cannot deliver the Unix
+signal semantics requested here.
 
 ## Contributing
 
