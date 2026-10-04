@@ -4,6 +4,7 @@
   "description": "Kill process running on given port",
   "license": "MIT",
   "main": "index.js",
+  "types": "index.d.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/tiaanduplessis/kill-port.git"
@@ -17,9 +18,10 @@
   "scripts": {
     "start": "npm run dev",
     "pretest": "npm run lint",
-    "test": "jest --env=node",
+    "test": "npm run test:types && jest --env=node",
     "lint": "standard --fix",
-    "precommit": "npm test"
+    "precommit": "npm test",
+    "test:types": "node type-tests/run.js"
   },
   "keywords": [
     "port",
@@ -34,6 +36,7 @@
   },
   "devDependencies": {
     "jest": "28.1.0",
-    "standard": "17.0.0"
+    "standard": "17.0.0",
+    "typescript": "5.9.3"
   }
 }
