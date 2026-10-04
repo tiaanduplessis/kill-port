@@ -56,6 +56,38 @@ With `pnpm`:
 pnpm add kill-port
 ```
 
+### Linux and containers
+
+The Unix implementation requires the full [lsof](https://github.com/lsof-org/lsof)
+utility on `PATH`, with support for `-nP` and `-i` and its standard network
+output. Minimal Linux images may omit it. The BusyBox `lsof` applet uses a
+different output format and is not a compatible replacement.
+
+For an existing kill-port installation or source checkout, add your distribution's
+`lsof` package to the image that runs it. For example, in an Alpine Dockerfile:
+
+```dockerfile
+RUN apk add --no-cache lsof
+```
+
+Installing the utility on the host does not make it available inside a container.
+The caller must be able to inspect and signal the target process within its
+process and network namespaces. Process ownership and permissions can limit what
+`lsof` can see.
+
+If a call fails:
+
+- A missing `lsof` command or another command failure rejects the API promise;
+  the CLI reports the command error.
+- `No process running on port` means no matching process was found in the
+  command output. It can also occur with incompatible `lsof` output or when
+  process visibility is restricted; it does not prove the port is unused.
+- The Unix implementation selects TCP listeners on the exact local port. UDP
+  selection includes connected sockets whose local port matches. Remote ports
+  and established TCP connections without a matching listener are not selected.
+- An unused port rejects the API promise. CLI `--quiet` suppresses success
+  messages only; errors remain visible.
+
 ## Usage
 
 ```js
