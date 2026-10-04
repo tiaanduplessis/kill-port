@@ -5,6 +5,7 @@ specifiers:
   jest: 28.1.0
   shell-exec: 1.0.2
   standard: 17.0.0
+  typescript: 5.9.3
 
 dependencies:
   get-them-args: 1.3.2
@@ -13,6 +14,7 @@ dependencies:
 devDependencies:
   jest: 28.1.0
   standard: 17.0.0
+  typescript: 5.9.3
 
 packages:
 
@@ -3223,6 +3225,12 @@ packages:
   /type-fest/0.3.1:
     resolution: {integrity: sha512-cUGJnCdr4STbePCgqNFbpVNCepa+kAVohJs1sLhxzdH+gnEoOd8VhbYa7pD3zZYGiURWM2xzEII3fQcRizDkYQ==}
     engines: {node: '>=6'}
+    dev: true
+
+  /typescript/5.9.3:
+    resolution: {integrity: sha512-jl1vZzPDinLr9eUt3J/t7V6FgNEw9QjvBPdysz9KfQDD41fQrC2Y4vKQdiaUpFT4bXlb1RHhLpp8wtm6M5TgSw==}
+    engines: {node: '>=14.17'}
+    hasBin: true
     dev: true
 
   /unbox-primitive/1.0.2:

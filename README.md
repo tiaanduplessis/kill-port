@@ -33,6 +33,7 @@
 - [Table of Contents](#table-of-contents)
 - [Install](#install)
 - [Usage](#usage)
+- [TypeScript](#typescript)
 - [API](#api)
 - [CLI](#cli)
 - [Contributing](#contributing)
@@ -116,9 +117,48 @@ server.listen(port, () => {
 
 ```
 
+## TypeScript
+
+Type declarations are included with this package; no separate types package is
+needed. When upgrading from `@types/kill-port`, remove it:
+
+```sh
+npm uninstall @types/kill-port
+```
+
+Leaving `@types/kill-port` installed can still cause a `shell-exec` declaration
+error, depending on the installed dependency layout. The bundled declarations
+have no dependency on `shell-exec` types or `@types/node`.
+
+Use a CommonJS import:
+
+```ts
+import killPort = require('kill-port')
+
+killPort('3000', 'TCP', 'SIGTERM').then(result => {
+  console.log(result.stdout)
+})
+```
+
+With `esModuleInterop: true`, a default import also works:
+
+```ts
+import killPort from 'kill-port'
+```
+
 ## API
 
-The module exports a single function that takes a port number as argument. It returns a promise.
+`killPort(port, protocol?, signal?)` accepts one port as a number or a decimal
+integer string, including surrounding whitespace. Ports must be between 1 and
+65535; validation happens at runtime. The protocol is case-insensitive `tcp` or
+`udp` and defaults to `tcp`. The signal defaults to `SIGKILL`; see
+[signal selection](#signal-selection) for supported signals and platform limits.
+
+The promise resolves with the final command's `{ stdout, stderr, cmd, code }`
+result. `stdout`, `stderr`, and `cmd` are strings, `code` is `0`, and `error` is
+absent or `undefined`. Invalid inputs, missing processes, and failed commands
+reject the promise. A successful signal request does not guarantee the target
+process has exited.
 
 ## CLI
 
@@ -217,6 +257,13 @@ silently replaced by forced termination. `TaskKill` cannot deliver the Unix
 signal semantics requested here.
 
 ## Contributing
+
+`npm test` runs the JavaScript tests and strict TypeScript consumer checks.
+`npm run test:types` checks both source and npm-packed declarations with CommonJS
+and default imports under Node, Node16, and NodeNext module resolution. It uses
+isolated consumers without external types, does not execute their examples, and
+disables lifecycle scripts while packing.
+
 
 Got an idea for a new feature? Found a bug? Contributions are welcome! Please [open up an issue](https://github.com/tiaanduplessis/feature-flip/issues) or [make a pull request](https://makeapullrequest.com/).
 
